@@ -5,6 +5,7 @@ import { JWT_SECRET } from "../config.js";
 import jwt from "jsonwebtoken";
 import authMiddleware from "../Middlewares/authMiddleware.js";
 import bcrypt from "bcrypt";
+import { Account } from "../models/AccountSchema.js";
 
 const router = express.Router();
 
@@ -44,7 +45,12 @@ router.post("/signup", async (req, res) => {
       firstName,
       lastName,
     });
+    // creating the fresh account for the user
 
+    await Account.create({
+      userId: user._id,
+      balance: 1 + Math.random() * 10000,
+    });
     const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
       expiresIn: "1h",
     });
