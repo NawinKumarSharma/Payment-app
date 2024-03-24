@@ -10,10 +10,10 @@ import { Account } from "../models/AccountSchema.js";
 const router = express.Router();
 
 const signUpSchema = zod.object({
-  username: zod.string().email(),
-  password: zod.string(),
   firstName: zod.string(),
   lastName: zod.string(),
+  userName: zod.string().email(),
+  password: zod.string(),
 });
 
 router.post("/signup", async (req, res) => {
@@ -21,14 +21,14 @@ router.post("/signup", async (req, res) => {
     const { success } = signUpSchema.safeParse(req.body);
     if (!success) {
       return res.status(411).json({
-        message: "Email already taken / Incorrect inputs",
+        message: "Incorrect inputs",
       });
     }
 
-    const { username, password, firstName, lastName } = req.body;
+    const { firstName, lastName, userName, password } = req.body;
 
     const existingUser = await User.findOne({
-      username: username,
+      userName,
     });
 
     if (existingUser) {
@@ -40,7 +40,7 @@ router.post("/signup", async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = await User.create({
-      username,
+      userName,
       password: hashedPassword,
       firstName,
       lastName,
@@ -49,7 +49,7 @@ router.post("/signup", async (req, res) => {
 
     await Account.create({
       userId: user._id,
-      balance: 1 + Math.random() * 10000,
+      balance: Math.round((Math.random() * (10000 - 5000) + 5000) * 100) / 100,
     });
     const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
       expiresIn: "1h",
@@ -68,7 +68,7 @@ router.post("/signup", async (req, res) => {
 });
 
 const signInSchema = zod.object({
-  username: zod.string().email(),
+  userName: zod.string().email(),
   password: zod.string(),
 });
 
@@ -81,8 +81,8 @@ router.post("/signin", authMiddleware, async (req, res) => {
       });
     }
 
-    const { username, password } = req.body;
-    const user = await User.findOne({ username });
+    const { userName, password } = req.body;
+    const user = await User.findOne({ userName });
     if (!user) {
       return res.status(401).json({
         message: "Invalid username or password",
@@ -155,7 +155,7 @@ router.get("/getUser", async (req, res) => {
 
     res.json({
       users: users.map((user) => ({
-        username: user.username,
+        userName: user.userName,
         firstName: user.firstName,
         lastName: user.lastName,
         _id: user._id,
