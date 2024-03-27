@@ -2,27 +2,37 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
+const initialState = {
+  firstName: "",
+  lastName: "",
+  userName: "",
+  password: ""
+};
+
 export function SignUp() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
+  const [details, setDetails] = useState(initialState);
   const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setDetails({ ...details, [name]: value });
+  };
 
   const postData = async () => {
     try {
+      const { firstName, lastName, userName, password } = details;
       const response = await axios.post("http://localhost:3000/api/v1/user/signup", {
         firstName,
         lastName,
         userName,
         password
       });
-      localStorage.setItem("token", response.data.token)
-      navigate("/signin")
+      localStorage.setItem("token", response.data.token);
+      navigate("/signin");
     } catch (error) {
-      console.log(error);
+      console.log("an error occurred :-", error.response.data);
     }
-  }
+  };
 
   return (
     <div className="h-[100vh] items-center flex justify-center px-5 lg:px-0">
@@ -50,33 +60,33 @@ export function SignUp() {
                 <input
                   className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                   type="text"
-                  onChange={(e) => {
-                    setFirstName(e.target.value)
-                  }}
+                  name="firstName"
+                  onChange={handleChange}
+                  value={details.firstName}
                   placeholder="Enter your first name"
                 />
                 <input
                   className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                   type="text"
-                  onChange={(e) => {
-                    setLastName(e.target.value)
-                  }}
+                  name="lastName"
+                  onChange={handleChange}
+                  value={details.lastName}
                   placeholder="Enter your last name"
                 />
                 <input
                   className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                   type="email"
-                  onChange={(e) => {
-                    setUserName(e.target.value)
-                  }}
+                  name="userName"
+                  onChange={handleChange}
+                  value={details.userName}
                   placeholder="Enter your email"
                 />
                 <input
                   className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                   type="password"
-                  onChange={(e) => {
-                    setPassword(e.target.value)
-                  }}
+                  name="password"
+                  onChange={handleChange}
+                  value={details.password}
                   placeholder="Password"
                 />
                 <button onClick={postData} className="mt-5 tracking-wide font-semibold bg-blue-700 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
@@ -107,4 +117,4 @@ export function SignUp() {
       </div>
     </div>
   );
-};
+}
