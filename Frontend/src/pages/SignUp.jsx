@@ -21,7 +21,7 @@ export function SignUp() {
   const postData = async () => {
     try {
       const { firstName, lastName, userName, password } = details;
-      const response = await axios.post("https://paytment-api.vercel.app/api/v1/user/signup", {
+      const response = await axios.post("http://localhost:3000/api/v1/user/signup", {
         firstName,
         lastName,
         userName,

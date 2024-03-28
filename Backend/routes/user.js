@@ -1,12 +1,14 @@
 import express from "express";
 import zod from "zod";
 import { User } from "../models/UserSchema.js";
-import { JWT_SECRET } from "../config.js";
+import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import authMiddleware from "../Middlewares/authMiddleware.js";
 import bcrypt from "bcrypt";
 import { Account } from "../models/AccountSchema.js";
-
+dotenv.config({
+  path: "./.env",
+});
 const router = express.Router();
 
 const signUpSchema = zod.object({
@@ -51,7 +53,7 @@ router.post("/signup", async (req, res) => {
       userId: user._id,
       balance: Math.round((Math.random() * (10000 - 5000) + 5000) * 100) / 100,
     });
-    const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
 
@@ -97,7 +99,7 @@ router.post("/signin", authMiddleware, async (req, res) => {
     }
 
     // Generating JWT token
-    const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
 
