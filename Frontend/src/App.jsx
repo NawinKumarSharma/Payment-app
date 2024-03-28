@@ -4,12 +4,15 @@ import { SignIn } from "./pages/SignIn"
 import { Dashboard } from "./pages/Dashboard"
 import { SendMoney } from "./pages/SendMoney"
 import { AuthContextProvider } from './Context/AuthContext.jsx'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
 
   return (
     <>
       <AuthContextProvider>
+      <ToastContainer />
         <BrowserRouter>
           <Routes>
             <Route path="/signup" element={<SignUp />} />
