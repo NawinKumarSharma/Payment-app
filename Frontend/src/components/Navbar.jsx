@@ -1,17 +1,18 @@
+import { FiUser } from 'react-icons/fi'; // Import user icon from react-icons library
+
 export const Navbar = () => {
-    return <div className="shadow h-14 flex justify-between">
-        <div className="flex flex-col justify-center h-full ml-4">
-            PayTM App
-        </div>
-        <div className="flex">
-            <div className="flex flex-col justify-center h-full mr-4">
-                Hello
-            </div>
-            <div className="rounded-full h-12 w-12 bg-slate-200 flex justify-center mt-1 mr-2">
-                <div className="flex flex-col justify-center h-full text-xl">
-                    U
+    return (
+        <div className="bg-gray-800 text-white shadow-md h-16 flex justify-between items-center px-4">
+            <div className="text-xl font-semibold">Payment App</div>
+            <div className="flex items-center">
+                <div className="mr-4 flex items-center">
+                    <span className="mr-2">Hello</span>
+                    <FiUser className="text-xl" />
+                </div>
+                <div className="rounded-full h-10 w-10 bg-gray-500 flex justify-center items-center">
+                    👋
                 </div>
             </div>
         </div>
-    </div>
+    );
 }
