@@ -16,7 +16,7 @@ export const SignIn = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "https://paytment-app-api.onrender.com/api/v1/user/signin",
+        "https://paytment-app-server.vercel.app/api/v1/user/signin",
         details,
         {
           headers: {

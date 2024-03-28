@@ -8,7 +8,7 @@ export const Dashboard = () => {
     const [balance, setBalance] = useState(0);
 
     useEffect(() => {
-        axios.get("https://paytment-app-api.onrender.com/api/v1/account/balance", {
+        axios.get("https://paytment-app-server.vercel.app/api/v1/account/balance", {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("token")
             }

@@ -21,7 +21,7 @@ export function SignUp() {
   const postData = async () => {
     try {
       const { firstName, lastName, userName, password } = details;
-      const response = await axios.post("https://paytment-app-api.onrender.com/api/v1/user/signup", {
+      const response = await axios.post("https://paytment-app-server.vercel.app/api/v1/user/signup", {
         firstName,
         lastName,
         userName,

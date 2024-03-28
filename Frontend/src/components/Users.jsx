@@ -7,7 +7,7 @@ export const Users = () => {
     const [filter, setFilter] = useState("");
 
     useEffect(() => {
-        axios.get("https://paytment-app-api.onrender.com/api/v1/user/getUser?filter=" + filter)
+        axios.get("https://paytment-app-server.vercel.app/api/v1/user/getUser?filter=" + filter)
             .then(response => {
                 setUsers(response.data.users);
                 // console.log(response.data.users)

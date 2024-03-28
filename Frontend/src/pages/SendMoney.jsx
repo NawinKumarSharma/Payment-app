@@ -19,7 +19,7 @@ export const SendMoney = () => {
                 return;
             }
 
-            await axios.post("https://paytment-app-api.onrender.com/api/v1/account/transfer", {
+            await axios.post("https://paytment-app-server.vercel.app/api/v1/account/transfer", {
                 to: id,
                 amount: parseFloat(amount)
             }, {
