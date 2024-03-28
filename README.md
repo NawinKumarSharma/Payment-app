@@ -1,4 +1,4 @@
-# payment application
+# Payment application
 
 Welcome to the project! This project aims to replicate the basic functionality of a simple payment exchange application, allowing users to perform transactions, view their account balance, and interact with other users.
 
@@ -40,6 +40,9 @@ To get started with the PayTM Clone project, follow these steps:
    ```
    VITE_SERVER_URL = your-server-url
    ```
+Replace the backend endpoints to your own, mainly in Frontend/src/pages portion.
+
+
 
 3. **Install Dependencies**: Install dependencies in the `frontend` and `backend` folders using npm or yarn:
 
@@ -66,8 +69,24 @@ To get started with the PayTM Clone project, follow these steps:
 
 This project implements MongoDB Transactions to ensure data consistency and reliability. Transactions follow the ACID properties of databases, ensuring that transactions are either fully completed and committed or reverted back in case of issues, thus preventing inconsistencies in the database.
 
+
+## Author
+
+**Author Name** &nbsp; : &nbsp; Nawin Kumar Sharma <br>
+
+**GitHub URI** &nbsp; &nbsp; &nbsp; : &nbsp; [nawinkumarsharma](https://github.com/nawinkumarsharma)
+
+## License
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT)
+
+
 ## Contributions
 
-Contributions to the PayTM Clone project are welcome! If you find any issues or have suggestions for improvements, please feel free to open an issue or submit a pull request.
+Contributions are welcome! If you find any bugs or want to add new features, feel free to open an issue or submit a pull request.
 
-Thank you for using PayTM Clone! Happy Coding! 🚀
+1. Fork the repository.
+2. Create your feature branch (`git checkout -b feature/your-feature-name`).
+3. Commit your changes (`git commit -m 'Add some feature'`).
+4. Push to the branch (`git push origin feature/your-feature-name`).
+5. Open a pull request.
