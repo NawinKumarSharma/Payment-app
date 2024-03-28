@@ -16,7 +16,7 @@ export const SignIn = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:3000/api/v1/user/signin",
+        "https://paytment-api.vercel.app/api/v1/user/signin",
         details,
         {
           headers: {
